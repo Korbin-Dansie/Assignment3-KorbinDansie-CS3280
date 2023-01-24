@@ -54,10 +54,10 @@
                         <ColumnDefinition Width="157*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="tblockNumberOfStudents" TextWrapping="Wrap" Text="Number of students:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Grid.Column="1" Margin="10,0,0,0" Height="18"/>
+                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Grid.Column="1" Margin="10,0,0,0" Height="18" AutomationProperties.HelpText="1-10"/>
 
                     <TextBlock x:Name="tblockNumberOfAssignments" TextWrapping="Wrap" Text="Number of assignments:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1" Height="18"/>
+                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1" Height="18" AutomationProperties.HelpText="1-99"/>
 
                     <Button x:Name="btnSubmitCounts" Content="Submit Counts" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10,1,10,1" Click="btnSubmitCounts_Click"/>
                 </Grid>
@@ -78,9 +78,9 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="btnFirstStudent" Content="&lt;&lt; First Student" Style="{StaticResource NavigateStyle}" Click="btnFirstStudent_Click" />
-                <Button x:Name="btnFirstStudent_Copy" Content="&lt; Prev Student" Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource NavigateStyle}" Click="btnFirstStudent_Copy_Click"/>
-                <Button x:Name="btnFirstStudent_Copy1" Content="&gt; Next Student" Grid.Column="2" Style="{StaticResource NavigateStyle}" Click="btnFirstStudent_Copy1_Click"/>
-                <Button x:Name="btnFirstStudent_Copy2" Content="&gt;&gt; Last Student" Grid.Column="3" Style="{StaticResource NavigateStyle}" Click="btnFirstStudent_Copy2_Click"/>
+                <Button x:Name="btnPrevStudent" Content="&lt; Prev Student" Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource NavigateStyle}" Click="btnPrevStudent_Click"/>
+                <Button x:Name="btnNextStudent" Content="&gt; Next Student" Grid.Column="2" Style="{StaticResource NavigateStyle}" Click="btnNextStudent_Click"/>
+                <Button x:Name="btnLastStudent" Content="&gt;&gt; Last Student" Grid.Column="3" Style="{StaticResource NavigateStyle}" Click="btnLastStudent_Click"/>
             </Grid>
         </GroupBox>
         <!--End Navigate-->
@@ -95,7 +95,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="tblockStudentInfoName" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Student #NAME:" VerticalAlignment="Center" Margin="0,0,5,0"/>
                 <TextBox x:Name="tbStudentInfoName" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Margin="5,0,5,0"/>
-                <Button x:Name="btnStudentInfoSaveName" Grid.Column="3" Content="Save Name" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,1,10,1"/>
+                <Button x:Name="btnStudentInfoSaveName" Grid.Column="3" Content="Save Name" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,1,10,1" Click="btnStudentInfoSaveName_Click"/>
             </Grid>
         </GroupBox>
         <!--End Student Info Top-->
@@ -115,13 +115,12 @@
                 <TextBlock x:Name="tbEnterAssignmentNumber_Copy" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Assignment Score:" VerticalAlignment="Center" Grid.Row="1" Margin="106,0,0,0"/>
                 <TextBox x:Name="tbAssignmentNumber" Grid.Column="1" TextWrapping="Wrap" Width="39" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" MaxLength="2" MaxLines="1" Height="18" Margin="5,0,5,0"/>
                 <TextBox x:Name="tbAssignmentScore" Grid.Column="1" TextWrapping="Wrap" Width="39" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" MaxLength="2" MaxLines="1" Height="18" Margin="5,0,5,0"/>
-                <Button Grid.Column="2" Content="Save Score" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" Padding="10,1,10,1" Margin="5,0,0,0"/>
+                <Button x:Name="btnSaveScore" Grid.Column="2" Content="Save Score" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" Padding="10,1,10,1" Margin="5,0,0,0" Click="btnSaveScore_Click"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="btnDisplayScores" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center">
+        <Button x:Name="btnDisplayScores" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Click="btnDisplayScores_Click">
             <TextBlock x:Name="tblockDisplayScores" TextWrapping="Wrap" Text="Display Scores" Padding="20,10,20,10" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <DataGrid x:Name="dataGrid" Grid.Column="1" Grid.Row="5" d:ItemsSource="{d:SampleData ItemCount=5}"/>
         <!--End Bottom Student Info-->
 
 

@@ -119,6 +119,9 @@ namespace Assignment3_KorbinDansie
             // Calculate letter grade
         }
 
+        private void dataGridDisplayScores_Initialized(object sender, EventArgs e)
+        {
 
+        }
     }
 }
