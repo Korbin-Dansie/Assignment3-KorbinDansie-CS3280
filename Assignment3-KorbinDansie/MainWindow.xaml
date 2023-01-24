@@ -9,7 +9,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -21,36 +22,38 @@
             <RowDefinition Height="57*"/>
         </Grid.RowDefinitions>
         <!--Counts Gird-->
-        <Grid Grid.Column="1" Margin="0,10,0,0">
+        <Grid x:Name="gCounts" Grid.Column="1" Margin="0,10,0,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75*"/>
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
-            <GroupBox x:Name="GBCounts" Header="Counts" BorderBrush="Black" Padding="0,0,0,2" Margin="0,0,0,5">
-                <Grid >
+            <GroupBox x:Name="gbCounts" Header="Counts" BorderBrush="Black" Padding="0,0,0,2" Margin="0,0,0,5">
+                <Grid x:Name="gCountsInner" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
                         <RowDefinition Height="50  *"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="71*"/>
-                        <ColumnDefinition Width="112*"/>
-                        <ColumnDefinition Width="61*"/>
+                        <ColumnDefinition Width="157*"/>
+                        <ColumnDefinition Width="74*"/>
+                        <ColumnDefinition Width="157*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="tblockNumberOfStudents" TextWrapping="Wrap" Text="Number of students:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16" Width="109"/>
+                    <TextBlock x:Name="tblockNumberOfStudents" TextWrapping="Wrap" Text="Number of students:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Grid.Column="1" Margin="10,0,0,0" Height="18"/>
 
-                    <TextBlock x:Name="tblockNumberOfAssignments" TextWrapping="Wrap" Text="Number of assignments:" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tblockNumberOfAssignments" TextWrapping="Wrap" Text="Number of assignments:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1" Height="18"/>
 
-                    <Button x:Name="btnSubmitCounts" Content="Submit Counts" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,21,0,0" Height="20" Width="82"/>
-
+                    <Button x:Name="btnSubmitCounts" Content="Submit Counts" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10,1,10,1"/>
                 </Grid>
             </GroupBox>
-            <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock x:Name="btnResetScores" TextWrapping="Wrap" TextAlignment="Center" Padding="20,0,20,0">Reset<LineBreak/>Scores</TextBlock>
+            <Button x:Name="btnResetScores" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tBlockResetScores" TextWrapping="Wrap" TextAlignment="Center" Padding="20,0,20,0">Reset<LineBreak/>Scores</TextBlock>
             </Button>
         </Grid>
+        <GroupBox x:Name="gbNavigate" Grid.Column="1" Header="Navigate" Grid.Row="1" Margin="0,5,0,5" BorderBrush="Black">
+            <Grid x:Name="gNavigate"/>
+        </GroupBox>
         <!--End Counts Gird-->
 
 
