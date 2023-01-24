@@ -27,13 +27,25 @@
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
             <GroupBox x:Name="GBCounts" Header="Counts" BorderBrush="Black">
-                <Canvas>
-                    <TextBlock x:Name="tblockNumberOfStudents" Canvas.Left="32" TextWrapping="Wrap" Text="Number of students:" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="tblockNumberOfStudents_Copy" Canvas.Left="10" TextWrapping="Wrap" Text="Number of assignments:" Canvas.Top="36" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left" Canvas.Left="156" Canvas.Top="9" VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="38.94"/>
-                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" Canvas.Left="156" Canvas.Top="35" HorizontalAlignment="Center" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="38.94"/>
-                    <Button x:Name="btnSubmiteCounts" Content="Submit Counts" Canvas.Left="352" Canvas.Top="21"/>
-                </Canvas>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="50  *"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="257*"/>
+                        <ColumnDefinition Width="109*"/>
+                        <ColumnDefinition Width="122*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="tblockNumberOfStudents" TextWrapping="Wrap" Text="Number of students:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="38.94" Grid.Column="1" Margin="10,0,0,0"/>
+
+                    <TextBlock x:Name="tblockNumberOfAssignments" TextWrapping="Wrap" Text="Number of assignments:" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="38.94" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1"/>
+
+                    <Button x:Name="btnSubmitCounts" Content="Submit Counts" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,21,0,0"/>
+
+                </Grid>
             </GroupBox>
             <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock x:Name="btnResetScores" TextWrapping="Wrap" TextAlignment="Center" Padding="20,0,20,0">Reset<LineBreak/>Scores</TextBlock>
