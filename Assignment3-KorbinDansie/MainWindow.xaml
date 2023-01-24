@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment3_KorbinDansie"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!--Counts Gird-->
+        <Grid Grid.Column="1" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox x:Name="GBCounts" Header="Counts
+                      ">
+                <Canvas>
+                    <TextBlock x:Name="TBlockNumberOfStudents" Canvas.Left="32" TextWrapping="Wrap" Text="Number of students:" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TBlockNumberOfStudents_Copy" Canvas.Left="10" TextWrapping="Wrap" Text="Number of Assignmetns:" Canvas.Top="36" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                </Canvas>
+            </GroupBox>
+            <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Padding="20,0,20,0">Reset<LineBreak/>Scores</TextBlock>
+            </Button>
+        </Grid>
+        <!--End Counts Gird-->
+
 
     </Grid>
 </Window>
