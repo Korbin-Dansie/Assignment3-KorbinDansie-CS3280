@@ -21,7 +21,7 @@
     </Window.Resources>
 
 
-    <Grid Height="700">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="8*"/>
@@ -121,6 +121,13 @@
         <Button x:Name="btnDisplayScores" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Click="btnDisplayScores_Click">
             <TextBlock x:Name="tblockDisplayScores" TextWrapping="Wrap" Text="Display Scores" Padding="20,10,20,10" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
+        <RichTextBox x:Name="rtbDisplayScores" Grid.Column="1" Grid.Row="5" Margin="0,5,0,10" AcceptsReturn="False" AutoWordSelection="False" IsUndoEnabled="False" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Loaded="rtbDisplayScores_Loaded">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
         <!--End Bottom Student Info-->
 
 

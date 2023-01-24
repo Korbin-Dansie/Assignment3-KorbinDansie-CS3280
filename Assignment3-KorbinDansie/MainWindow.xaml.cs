@@ -117,10 +117,31 @@ namespace Assignment3_KorbinDansie
             // Add up then cal avg
 
             // Calculate letter grade
+            FlowDocument myFlowDoc = new FlowDocument();
+
+            // Add paragraphs to the FlowDocument.
+            myFlowDoc.Blocks.Add(new Paragraph(new Run("Paragraph 1")));
+            myFlowDoc.Blocks.Add(new Paragraph(new Run("Paragraph 2")));
+            myFlowDoc.Blocks.Add(new Paragraph(new Run("Paragraph 3")));
+            RichTextBox myRichTextBox = new RichTextBox();
+
+            // Add initial content to the RichTextBox.
+            rtbDisplayScores.Document = myFlowDoc;
+
         }
 
-        private void dataGridDisplayScores_Initialized(object sender, EventArgs e)
+        private void rtbDisplayScores_Loaded(object sender, RoutedEventArgs e)
         {
+            FlowDocument myFlowDoc = new FlowDocument();
+
+            // Add paragraphs to the FlowDocument.
+            myFlowDoc.Blocks.Add(new Paragraph(new Run("Student         #1  #2  #3  #4  ")));
+            myFlowDoc.Blocks.Add(new Paragraph(new Run("Mark            100 20")));
+            myFlowDoc.Blocks.Add(new Paragraph(new Run("Paragraph 3")));
+            RichTextBox myRichTextBox = new RichTextBox();
+
+            // Add initial content to the RichTextBox.
+            rtbDisplayScores.Document = myFlowDoc;
 
         }
     }
