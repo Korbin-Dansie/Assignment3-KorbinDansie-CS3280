@@ -132,16 +132,17 @@ namespace Assignment3_KorbinDansie
 
         private void rtbDisplayScores_Loaded(object sender, RoutedEventArgs e)
         {
-            FlowDocument myFlowDoc = new FlowDocument();
+            //FlowDocument myFlowDoc = new FlowDocument();
+            
 
-            // Add paragraphs to the FlowDocument.
-            myFlowDoc.Blocks.Add(new Paragraph(new Run("Student         #1  #2  #3  #4  ")));
-            myFlowDoc.Blocks.Add(new Paragraph(new Run("Mark            100 20")));
-            myFlowDoc.Blocks.Add(new Paragraph(new Run("Paragraph 3")));
-            RichTextBox myRichTextBox = new RichTextBox();
+            //// Add paragraphs to the FlowDocument.
+            //myFlowDoc.Blocks.Add(new Paragraph(new Run("Student                         #1      #2      #3      #4      #5      AVG     GRADE")));
+            //myFlowDoc.Blocks.Add(new Paragraph(new Run("Mike                            100     20      1       2       100     37      A"))); /* 8 tabs (4) = 32, #1 TAB TAB*/
+            //RichTextBox myRichTextBox = new RichTextBox();
 
-            // Add initial content to the RichTextBox.
-            rtbDisplayScores.Document = myFlowDoc;
+
+            //// Add initial content to the RichTextBox.
+            //rtbDisplayScores.Document = myFlowDoc;
 
         }
     }

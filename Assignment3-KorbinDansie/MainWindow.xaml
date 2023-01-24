@@ -9,14 +9,21 @@
     <Window.Resources>
         <ResourceDictionary>
             <Thickness  x:Key="CommonMargin" Left="10" Right="10" Top="1" Bottom="1" />
-
             <Style x:Key="NavigateStyle" TargetType="Button">
                 <Setter Property="Padding" Value="{StaticResource CommonMargin}" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Width" Value="110" />
             </Style>
-
+            <Style x:Key="ErrorCountsStyle" TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="#FFD9534F"/>
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="1" />
+                <Setter Property="Visibility" Value="Hidden"/>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -29,24 +36,25 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="85*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="175*"/>
+            <RowDefinition Height="97*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="222*"/>
         </Grid.RowDefinitions>
         <!--Counts-->
-        <Grid x:Name="gCounts" Grid.Column="1" Margin="0,10,0,5">
+        <Grid x:Name="gCounts" Grid.Column="1" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75*"/>
-                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="15*"/>
             </Grid.ColumnDefinitions>
             <GroupBox x:Name="gbCounts" Header="Counts" BorderBrush="Black" Padding="0,0,0,2" Margin="0,0,0,5">
                 <Grid x:Name="gCountsInner" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50*"/>
-                        <RowDefinition Height="50  *"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="157*"/>
@@ -66,10 +74,13 @@
                 <TextBlock x:Name="tBlockResetScores" TextWrapping="Wrap" TextAlignment="Center" Padding="20,0,20,0">Reset<LineBreak/>Scores</TextBlock>
             </Button>
         </Grid>
+        <TextBlock x:Name="tbErrorAssignments" Text="Error: Number of assignments nees to be between 1 - 99" Style="{StaticResource ErrorCountsStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="tbErrorStudents" Text="Error: Number of students nees to be between 1 - 10" Style="{StaticResource ErrorCountsStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
         <!--End Counts-->
 
         <!--Navigate-->
-        <GroupBox x:Name="gbNavigate" Grid.Column="1" Header="Navigate" Grid.Row="1" Margin="0,5,0,5" BorderBrush="Black">
+        <GroupBox x:Name="gbNavigate" Grid.Column="1" Header="Navigate" Grid.Row="2" Margin="0,5,0,5" BorderBrush="Black">
             <Grid x:Name="gNavigate" Margin="0,5,0,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -86,7 +97,7 @@
         <!--End Navigate-->
 
         <!-- Student Info Top-->
-        <GroupBox x:Name="gbStudentInfoName" Grid.Column="1" Header="Student Info" Grid.Row="2" Margin="0,5,0,5" BorderBrush="Black">
+        <GroupBox x:Name="gbStudentInfoName" Grid.Column="1" Header="Student Info" Grid.Row="3" Margin="0,5,0,5" BorderBrush="Black">
             <Grid x:Name="gStudentInfoName">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
@@ -94,13 +105,13 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="tblockStudentInfoName" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Student #NAME:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox x:Name="tbStudentInfoName" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Margin="5,0,5,0"/>
+                <TextBox x:Name="tbStudentInfoName" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Margin="5,0,5,0" MaxLength="32"/>
                 <Button x:Name="btnStudentInfoSaveName" Grid.Column="3" Content="Save Name" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,1,10,1" Click="btnStudentInfoSaveName_Click"/>
             </Grid>
         </GroupBox>
         <!--End Student Info Top-->
         <!--Student Info Bottom-->
-        <GroupBox x:Name="gbStudentInfo" Grid.Column="1" Header="Student Info" Grid.Row="3" BorderBrush="Black" Margin="0,5,0,5">
+        <GroupBox x:Name="gbStudentInfo" Grid.Column="1" Header="Student Info" Grid.Row="4" BorderBrush="Black" Margin="0,5,0,5">
             <Grid x:Name="gStudentInfo">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="209*"/>
@@ -118,18 +129,19 @@
                 <Button x:Name="btnSaveScore" Grid.Column="2" Content="Save Score" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" Padding="10,1,10,1" Margin="5,0,0,0" Click="btnSaveScore_Click"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="btnDisplayScores" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Click="btnDisplayScores_Click">
+        <Button x:Name="btnDisplayScores" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Click="btnDisplayScores_Click" Margin="0,5,0,5">
             <TextBlock x:Name="tblockDisplayScores" TextWrapping="Wrap" Text="Display Scores" Padding="20,10,20,10" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <RichTextBox x:Name="rtbDisplayScores" Grid.Column="1" Grid.Row="5" Margin="0,5,0,10" AcceptsReturn="False" AutoWordSelection="False" IsUndoEnabled="False" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Loaded="rtbDisplayScores_Loaded">
+        <RichTextBox x:Name="rtbDisplayScores" Grid.Column="1" Grid.Row="6" Margin="0,5,0,10" AcceptsReturn="False" AutoWordSelection="False" IsUndoEnabled="False" IsReadOnly="True" Loaded="rtbDisplayScores_Loaded" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="RichTextBox"/>
+                    <Run Text="Student                         #1      #2      #3      #4      #5      AVG     GRADE asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Mike                            100     20      1       2       100     37      A"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
         <!--End Bottom Student Info-->
-
-
     </Grid>
 </Window>
