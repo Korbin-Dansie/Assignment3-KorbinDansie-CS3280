@@ -62,10 +62,10 @@
                         <ColumnDefinition Width="157*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="tblockNumberOfStudents" TextWrapping="Wrap" Text="Number of students:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Grid.Column="1" Margin="10,0,0,0" Height="18" AutomationProperties.HelpText="1-10"/>
+                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Grid.Column="1" Margin="10,0,0,0" Height="18" AutomationProperties.HelpText="1-10" Text="3"/>
 
                     <TextBlock x:Name="tblockNumberOfAssignments" TextWrapping="Wrap" Text="Number of assignments:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1" Height="18" AutomationProperties.HelpText="1-99"/>
+                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1" Height="18" AutomationProperties.HelpText="1-99" Text="5"/>
 
                     <Button x:Name="btnSubmitCounts" Content="Submit Counts" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10,1,10,1" Click="btnSubmitCounts_Click"/>
                 </Grid>
