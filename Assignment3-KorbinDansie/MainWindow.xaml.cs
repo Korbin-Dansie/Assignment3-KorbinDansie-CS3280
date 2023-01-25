@@ -287,7 +287,7 @@ namespace Assignment3_KorbinDansie
 
             FlowDocument myFlowDoc = new FlowDocument();
 
-            int length;
+            double length;
             myFlowDoc.Blocks.Add(createNewHeaders(out length));
 
             //Set lenght of rtb so no overfill
@@ -310,7 +310,7 @@ namespace Assignment3_KorbinDansie
         /// </summary>
         /// <param name="length">Returns lenght of header</param>
         /// <returns></returns>
-        private Paragraph createNewHeaders(out int length)
+        private Paragraph createNewHeaders(out double length)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -341,7 +341,22 @@ namespace Assignment3_KorbinDansie
 
             // Return the new paragraph
             Paragraph paragraph = new Paragraph(new Run(sb.ToString()));
-            length = sb.Length;
+
+            length = sb.ToString().Length * 7.2; // No idea why its 7.2. Its based on px meaurements
+
+            //// Might look into formated text latter
+            //Typeface tf = new Typeface(rtbDisplayScores.FontFamily, rtbDisplayScores.FontStyle, rtbDisplayScores.FontWeight, rtbDisplayScores.FontStretch);
+            //FormattedText formattedText = new 
+            //    FormattedText
+            //    (
+            //    sb.ToString(),
+            //    System.Globalization.CultureInfo.CurrentCulture,
+            //    rtbDisplayScores.FlowDirection,
+            //    tf,
+            //    rtbDisplayScores.size
+            //    rtbDisplayScores.FontSize,
+            //    rtbDisplayScores.Foreground
+            //    )
             return paragraph;
 
         }
@@ -360,7 +375,7 @@ namespace Assignment3_KorbinDansie
             // Add the name
             string name = saStudentNames[iStudent];
             sb.Append(name);
-            sb.Append("\t\t\t\t");
+            sb.Append("    ");
 
             // Add the grades
             for (int i = 0; i < iaStudentScores.GetLength(1); i++)
