@@ -132,7 +132,7 @@
         <Button x:Name="btnDisplayScores" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Click="btnDisplayScores_Click" Margin="0,5,0,5">
             <TextBlock x:Name="tblockDisplayScores" TextWrapping="Wrap" Text="Display Scores" Padding="20,10,20,10" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <RichTextBox x:Name="rtbDisplayScores" Grid.Column="1" Grid.Row="6" Margin="0,5,0,10" AcceptsReturn="False" AutoWordSelection="False" IsUndoEnabled="False" IsReadOnly="True" Loaded="rtbDisplayScores_Loaded" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" FontFamily="Courier New">
+        <RichTextBox x:Name="rtbDisplayScores" Grid.Column="1" Grid.Row="6" Margin="0,5,0,10" AcceptsReturn="False" AutoWordSelection="False" IsUndoEnabled="False" IsReadOnly="True" Loaded="rtbDisplayScores_Loaded" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" FontFamily="Courier New">
             <FlowDocument>
                 <Paragraph AllowDrop="False">
                     <Run Text="Student      #1      #2      #3      #4      #5      AVG     GRADE"/>

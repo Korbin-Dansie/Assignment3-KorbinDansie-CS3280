@@ -137,13 +137,14 @@ namespace Assignment3_KorbinDansie
                 saStudentNames[i] = "Student #" + (i+1);
             }
 
+            Random random = new Random();
             int testIndex = 0;
             for (int i = 0; i < iaStudentScores.GetLength(0); i++)
             {
                 //For each assignment set it to zero
                 for (int j = 0; j < iaStudentScores.GetLength(1); j++)
                 {
-                    iaStudentScores[i, j] = testIndex++;
+                    iaStudentScores[i, j] = random.Next(1, 100);
                 }
             }
         }
@@ -271,20 +272,6 @@ namespace Assignment3_KorbinDansie
         /// <param name="e"></param>
         private void btnDisplayScores_Click(object sender, RoutedEventArgs e)
         {
-            const int numberOfTabsForName = 8;
-            const int numberOfTabsBetweenRows = 2;
-            // Generate header, number of assignments
-
-            // Outer for loop through the students
-
-            //Inner loop through the grades
-
-            // Add up then cal avg
-
-            // Calculate letter grade
-
-
-
             FlowDocument myFlowDoc = new FlowDocument();
 
             double length;
@@ -301,7 +288,6 @@ namespace Assignment3_KorbinDansie
 
             // Add initial content to the RichTextBox.
             rtbDisplayScores.Document = myFlowDoc;
-
         }
 
         /// <summary>
@@ -316,32 +302,59 @@ namespace Assignment3_KorbinDansie
             // Add the First header
             sb.Append("Student");
 
-
-            int sbTabLength = sb.Length;
-            int sbTabAssignmentLength;
-
-            while (sbTabLength < NUMBER_OF_TABS_AFTER_NAME * 4) // tab = 4
+            // Add spaces between columns
+            for (int sbTabLength = sb.Length; sbTabLength < NUMBER_OF_TABS_AFTER_NAME * 4; sbTabLength++)
             {
                 sb.Append(" ");
-                sbTabLength++;
             }
 
-            // Add the assignments
+            // Add the assignments headers
+            StringBuilder sbAssignments = new StringBuilder();
             for (int i = 0; i < iaStudentScores.GetLength(1); i++)
             {
-                String assignmentNumberStr = " #" + (i + 1);
-                sbTabAssignmentLength = assignmentNumberStr.Length;
-                for (int j = sbTabAssignmentLength; j < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; j++)
+                // # number
+                // If on assignments 1 - 9 add one else add two spaces
+                if ((i + 1) < 10)
                 {
-                    assignmentNumberStr += " ";
+                    sbAssignments.Append(" ");
                 }
-                sb.Append(assignmentNumberStr);
+
+                sbAssignments.Append("#" + (i + 1));
+                // Add spaces between columns
+                for (int sbTabLength = sbAssignments.Length; sbTabLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; sbTabLength++)
+                {
+                    sbAssignments.Append(" ");
+                }
+
+                // Add to main sb then clearn
+                sb.Append(sbAssignments);
+                sbAssignments.Clear();
             }
+
+            // Add avg
+            sbAssignments.Append("AVG");
+
+            for (int sbTabLength = sbAssignments.Length; sbTabLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; sbTabLength++)
+            {
+                sbAssignments.Append(" ");
+            }
+            sb.Append(sbAssignments);
+            sbAssignments.Clear();
+
+            // Add grade
+            sbAssignments.Append("GRADE");
+
+            for (int sbTabLength = sbAssignments.Length; sbTabLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; sbTabLength++)
+            {
+                sbAssignments.Append(" ");
+            }
+            sb.Append(sbAssignments);
+            sbAssignments.Clear();
 
             // Return the new paragraph
             Paragraph paragraph = new Paragraph(new Run(sb.ToString()));
 
-            length = sb.ToString().Length * 7.2; // No idea why its 7.2. Its based on px meaurements
+            length = sb.ToString().Length * 7.3; // No idea why its this number. Its based on px meaurements
 
             //// Might look into formated text latter
             //Typeface tf = new Typeface(rtbDisplayScores.FontFamily, rtbDisplayScores.FontStyle, rtbDisplayScores.FontWeight, rtbDisplayScores.FontStretch);
@@ -357,6 +370,8 @@ namespace Assignment3_KorbinDansie
             //    rtbDisplayScores.Foreground
             //    )
 
+            // OR something with a bitmap?
+
             return paragraph;
 
         }
@@ -370,22 +385,19 @@ namespace Assignment3_KorbinDansie
         /// <returns></returns>
         private Paragraph createNewStudentParagraph(int iStudent)
         {
+            double average = 0;
+
             StringBuilder sb = new StringBuilder();
 
 
             // Add the name
             string name = saStudentNames[iStudent];
             sb.Append(name);
-            sb.Append("");
 
-            int sbTabLength = sb.Length;
-            int sbTabAssignmentLength;
-
-            /// add white spaces to align name
-            while (sbTabLength < NUMBER_OF_TABS_AFTER_NAME * 4) // tab = 4
+            // Add tabs between columns
+            for (int sbTabLength = sb.Length; sbTabLength < NUMBER_OF_TABS_AFTER_NAME * 4; sbTabLength++)
             {
                 sb.Append(" ");
-                sbTabLength++;
             }
 
 
@@ -394,9 +406,12 @@ namespace Assignment3_KorbinDansie
             for (int i = 0; i < iaStudentScores.GetLength(1); i++)
             {
                 int currentAssignmentScore = iaStudentScores[iStudent, i];
+
+                // Total the grades together
+                average += currentAssignmentScore;
                 
                 // Add spaces based on how the length of the grade
-                if(currentAssignmentScore > 99 && currentAssignmentScore < 1000)
+                if(currentAssignmentScore > 99)
                 {
                     ; // No spaces needed
                 }
@@ -411,18 +426,105 @@ namespace Assignment3_KorbinDansie
 
                 sbGrade.Append(currentAssignmentScore);
 
-                // Add spaces between columns
-                sbTabAssignmentLength = sbGrade.Length;
-                while(sbTabAssignmentLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4)
+                // Add tabs between columns
+                for (int sbTabLength = sbGrade.Length; sbTabLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; sbTabLength++)
                 {
                     sbGrade.Append(" ");
-                    sbTabAssignmentLength++;
                 }
 
                 // Add to string then clear
                 sb.Append(sbGrade);
                 sbGrade.Clear();
             }
+
+
+            // Add the avg
+            average = average / iaStudentScores.GetLength(1);
+
+            // add spaces before avg
+            if((int)average > 99)
+            {
+                ;
+            }
+            else if(((int)average) > 9)
+            {
+                sbGrade.Append(" ");
+            }
+            else
+            {
+                sbGrade.Append("  ");
+            }
+
+            sbGrade.Append(String.Format("{0:0.00}", average));
+
+            // Add tabs between columns
+            for (int sbTabLength = sbGrade.Length; sbTabLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; sbTabLength++)
+            {
+                sbGrade.Append(" ");
+            }
+
+            sb.Append(sbGrade);
+            sbGrade.Clear();
+
+
+            // Add the letter grade
+            if(average >= 93)
+            {
+                sbGrade.Append("A");
+            }
+            else if(average >= 90)
+            {
+                sbGrade.Append("A-");
+            }
+            else if (average >= 87)
+            {
+                sbGrade.Append("B+");
+            }
+            else if (average >= 83)
+            {
+                sbGrade.Append("B");
+            }
+            else if (average >= 80)
+            {
+                sbGrade.Append("B-");
+            }
+            else if (average >= 77)
+            {
+                sbGrade.Append("C+");
+            }
+            else if (average >= 73)
+            {
+                sbGrade.Append("C");
+            }
+            else if (average >= 70)
+            {
+                sbGrade.Append("C-");
+            }
+            else if (average >= 67)
+            {
+                sbGrade.Append("D+");
+            }
+            else if (average >= 63)
+            {
+                sbGrade.Append("D");
+            }
+            else if (average >= 60)
+            {
+                sbGrade.Append("D-");
+            }
+            else
+            {
+                sbGrade.Append("E");
+            }
+
+            // Add tabs between columns
+            for (int sbTabLength = sbGrade.Length; sbTabLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; sbTabLength++)
+            {
+                sbGrade.Append(" ");
+            }
+
+            sb.Append(sbGrade);
+            sbGrade.Clear();
 
 
             // Return the new paragraph
