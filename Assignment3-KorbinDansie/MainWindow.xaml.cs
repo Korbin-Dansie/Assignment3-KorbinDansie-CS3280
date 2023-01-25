@@ -64,6 +64,27 @@ namespace Assignment3_KorbinDansie
         }
 
         #region Counts
+
+        /// <summary>
+        /// When focused select all
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbNumberOfStudents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            tbNumberOfStudents.SelectAll();
+        }
+
+        /// <summary>
+        /// When focused select all
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbNumberOfAssignments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            tbNumberOfAssignments.SelectAll();
+        }
+
         /// <summary>
         /// Reset the window when clicked
         /// </summary>
@@ -144,9 +165,12 @@ namespace Assignment3_KorbinDansie
                 //For each assignment set it to zero
                 for (int j = 0; j < iaStudentScores.GetLength(1); j++)
                 {
-                    iaStudentScores[i, j] = random.Next(1, 100);
+                    iaStudentScores[i, j] = random.Next(50, 100);
                 }
             }
+
+            // Update the currently selected student
+            updatetblockStudentInfoName();
         }
 
         #endregion Counts
@@ -198,7 +222,10 @@ namespace Assignment3_KorbinDansie
         private void btnFirstStudent_Click(object sender, RoutedEventArgs e)
         {
             // iSelectedIndex = 0
+            iSelectedStudentIndex = 0;
+
             // Display Student name
+            updatetblockStudentInfoName();
         }
 
         /// <summary>
@@ -209,8 +236,12 @@ namespace Assignment3_KorbinDansie
         private void btnPrevStudent_Click(object sender, RoutedEventArgs e)
         {
             // Move student index - 1. Dont go below zero.
+            if(iSelectedStudentIndex > 0)
+            {
+                iSelectedStudentIndex--;
+            }
             // Display Student name
-            
+            updatetblockStudentInfoName();
         }
 
         /// <summary>
@@ -220,9 +251,13 @@ namespace Assignment3_KorbinDansie
         /// <param name="e"></param>
         private void btnNextStudent_Click(object sender, RoutedEventArgs e)
         {
-            // Move student index - 1. Dont go below zero.
+            // Move student index + 1. Dont go above limit.
+            if (iSelectedStudentIndex < saStudentNames.Length - 1)
+            {
+                iSelectedStudentIndex++;
+            }
             // Display Student name
-
+            updatetblockStudentInfoName();
         }
 
         /// <summary>
@@ -233,8 +268,12 @@ namespace Assignment3_KorbinDansie
         private void btnLastStudent_Click(object sender, RoutedEventArgs e)
         {
             // iSelectedIndex = last index
+            iSelectedStudentIndex = saStudentNames.Length - 1;
+
             // Display Student name
+            updatetblockStudentInfoName();
         }
+
         #endregion Naviage
 
         #region Student Info Top
@@ -245,6 +284,22 @@ namespace Assignment3_KorbinDansie
         /// <param name="e"></param>
         private void btnStudentInfoSaveName_Click(object sender, RoutedEventArgs e)
         {
+            saStudentNames[iSelectedStudentIndex] = tbStudentInfoName.Text;
+            tbStudentInfoName.Text = String.Empty;
+
+            updatetblockStudentInfoName();
+        }
+
+        /// <summary>
+        /// Update the tblockStudentInfoName with the current name at iSelectedStudentIndex
+        /// </summary>
+        private void updatetblockStudentInfoName()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(saStudentNames[iSelectedStudentIndex]);
+
+            // Set the selected students name
+            tblockStudentInfoName.Text = sb.ToString();
 
         }
         #endregion Student Info Top
@@ -532,27 +587,8 @@ namespace Assignment3_KorbinDansie
             return paragraph;
         }
 
-
-
-        /// <summary>
-        /// When loaded poupulate the Display text box with this data
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void rtbDisplayScores_Loaded(object sender, RoutedEventArgs e)
-        {
-            FlowDocument myFlowDoc = new FlowDocument();
-            myFlowDoc.PageWidth = 1000;
-
-            // Add paragraphs to the FlowDocument.
-            myFlowDoc.Blocks.Add(new Paragraph(new Run("Student                         #1      #2      #3      #4      #5      AVG     GRADE")));
-            myFlowDoc.Blocks.Add(new Paragraph(new Run("Mike                            100     20      1       2       100     37.00   A"))); /* 8 tabs (4) = 32, #1 TAB TAB*/
-
-            // Add initial content to the RichTextBox.
-            rtbDisplayScores.Document = myFlowDoc;
-
-        }
         #endregion Display Scores
+
 
     } // End of partial class
 }
