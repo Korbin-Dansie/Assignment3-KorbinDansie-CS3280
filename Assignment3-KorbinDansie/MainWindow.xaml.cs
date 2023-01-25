@@ -171,6 +171,9 @@ namespace Assignment3_KorbinDansie
 
             // Update the currently selected student
             updatetblockStudentInfoName();
+
+            // Update the valid range
+            updatetbEnterAssignmentNumber();
         }
 
         #endregion Counts
@@ -314,6 +317,21 @@ namespace Assignment3_KorbinDansie
         {
             // Validate data
             // Save the students core to the array iaStudentScore - 1
+        }
+
+        /// <summary>
+        /// Update the tbEnterAssignmentNumber text with the current range
+        /// </summary>
+        private void updatetbEnterAssignmentNumber()
+        {
+            StringBuilder sb = new StringBuilder();
+            String text = tbEnterAssignmentNumber.Text;
+
+            // Get last all text before last space
+            sb.Append(text.Substring(0, text.LastIndexOf(' ') + 1));
+            sb.Append($"(1-{iaStudentScores.GetLength(1)}):");
+
+            tbEnterAssignmentNumber.Text = sb.ToString();
         }
 
         #endregion Student Info Bottom
