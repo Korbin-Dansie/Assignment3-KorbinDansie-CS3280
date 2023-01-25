@@ -298,7 +298,6 @@ namespace Assignment3_KorbinDansie
             {
                 myFlowDoc.Blocks.Add(createNewStudentParagraph(i));
             }
-            //myFlowDoc.Blocks.Add(new Paragraph(new Run("Paragraph 1")));
 
             // Add initial content to the RichTextBox.
             rtbDisplayScores.Document = myFlowDoc;
@@ -308,7 +307,7 @@ namespace Assignment3_KorbinDansie
         /// <summary>
         /// Create a new paragraph for the headers
         /// </summary>
-        /// <param name="length">Returns lenght of header</param>
+        /// <param name="length">Returns lenght of header in px</param>
         /// <returns></returns>
         private Paragraph createNewHeaders(out double length)
         {
@@ -319,7 +318,7 @@ namespace Assignment3_KorbinDansie
 
 
             int sbTabLength = sb.Length;
-            int sbTabAssignmentLenght;
+            int sbTabAssignmentLength;
 
             while (sbTabLength < NUMBER_OF_TABS_AFTER_NAME * 4) // tab = 4
             {
@@ -327,12 +326,12 @@ namespace Assignment3_KorbinDansie
                 sbTabLength++;
             }
 
-            // Add the grades
+            // Add the assignments
             for (int i = 0; i < iaStudentScores.GetLength(1); i++)
             {
-                String assignmentNumberStr = "#" + (i + 1);
-                sbTabAssignmentLenght = assignmentNumberStr.Length;
-                for (int j = 0; j < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; j++)
+                String assignmentNumberStr = " #" + (i + 1);
+                sbTabAssignmentLength = assignmentNumberStr.Length;
+                for (int j = sbTabAssignmentLength; j < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4; j++)
                 {
                     assignmentNumberStr += " ";
                 }
@@ -357,6 +356,7 @@ namespace Assignment3_KorbinDansie
             //    rtbDisplayScores.FontSize,
             //    rtbDisplayScores.Foreground
             //    )
+
             return paragraph;
 
         }
@@ -372,17 +372,58 @@ namespace Assignment3_KorbinDansie
         {
             StringBuilder sb = new StringBuilder();
 
+
             // Add the name
             string name = saStudentNames[iStudent];
             sb.Append(name);
-            sb.Append("    ");
+            sb.Append("");
+
+            int sbTabLength = sb.Length;
+            int sbTabAssignmentLength;
+
+            /// add white spaces to align name
+            while (sbTabLength < NUMBER_OF_TABS_AFTER_NAME * 4) // tab = 4
+            {
+                sb.Append(" ");
+                sbTabLength++;
+            }
+
 
             // Add the grades
+            StringBuilder sbGrade = new StringBuilder();
             for (int i = 0; i < iaStudentScores.GetLength(1); i++)
             {
-                sb.Append(iaStudentScores[iStudent, i]);
-                sb.Append("  ");
+                int currentAssignmentScore = iaStudentScores[iStudent, i];
+                
+                // Add spaces based on how the length of the grade
+                if(currentAssignmentScore > 99 && currentAssignmentScore < 1000)
+                {
+                    ; // No spaces needed
+                }
+                else if (currentAssignmentScore > 9)
+                {
+                    sbGrade.Append(" ");
+                }
+                else
+                {
+                    sbGrade.Append("  ");
+                }
+
+                sbGrade.Append(currentAssignmentScore);
+
+                // Add spaces between columns
+                sbTabAssignmentLength = sbGrade.Length;
+                while(sbTabAssignmentLength < NUMBER_OF_TABS_BETWEEN_COLLUMS * 4)
+                {
+                    sbGrade.Append(" ");
+                    sbTabAssignmentLength++;
+                }
+
+                // Add to string then clear
+                sb.Append(sbGrade);
+                sbGrade.Clear();
             }
+
 
             // Return the new paragraph
             Paragraph paragraph = new Paragraph(new Run(sb.ToString()));
