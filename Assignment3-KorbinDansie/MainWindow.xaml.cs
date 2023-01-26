@@ -93,9 +93,22 @@ namespace Assignment3_KorbinDansie
         private void btnResetScores_Click(object sender, RoutedEventArgs e)
         {
             // Reset Window
+
+            // Reset attributes
+            iSelectedStudentIndex = 0;
+
+               // iaStudentScores
             // Enable top
             enableTopUI(true);
             enableBottomUI(false);
+
+            resetCounts();
+            resetStudentInfoTop();
+            resetStudentInfoBottom();
+
+            // Clear Display Scores
+            rtbDisplayScores.Document.Blocks.Clear();
+            rtbDisplayScores.Document.PageWidth = 0; // Set page width in px.
         }
 
         /// <summary>
@@ -103,7 +116,11 @@ namespace Assignment3_KorbinDansie
         /// </summary>
         private void resetCounts()
         {
+            tbNumberOfStudents.Text = String.Empty;
+            tbNumberOfAssignments.Text = String.Empty;
 
+            tbErrorAssignments.Visibility = Visibility.Hidden;
+            tbErrorStudents.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -111,7 +128,8 @@ namespace Assignment3_KorbinDansie
         /// </summary>
         private void resetStudentInfoTop()
         {
-
+            tblockStudentInfoName.Text = "Student #NAME";
+            tbStudentInfoName.Text = String.Empty;
         }
 
         /// <summary>
@@ -119,7 +137,14 @@ namespace Assignment3_KorbinDansie
         /// </summary>
         private void resetStudentInfoBottom()
         {
+            // Update the range of accepted number on the UI
+            updateUIAssignmentNumberRange(99);
 
+            tbErrorStudentInfoAssignmentNumber.Visibility = Visibility.Hidden;
+            tbErrorStudentInfoAssignmentScore.Visibility = Visibility.Hidden;
+
+            tbAssignmentNumber.Text = String.Empty;
+            tbAssignmentScore.Text = String.Empty;
         }
 
 
@@ -191,7 +216,7 @@ namespace Assignment3_KorbinDansie
                 //For each assignment set it to zero
                 for (int j = 0; j < iaStudentScores.GetLength(1); j++)
                 {
-                    iaStudentScores[i, j] = random.Next(50, 100);
+                    iaStudentScores[i, j] = 0;
                 }
             }
 
@@ -331,6 +356,7 @@ namespace Assignment3_KorbinDansie
             tblockStudentInfoName.Text = sb.ToString();
 
         }
+
         #endregion Student Info Top
 
         #region Student Info Bottom
