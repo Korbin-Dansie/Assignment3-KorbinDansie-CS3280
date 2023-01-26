@@ -99,6 +99,32 @@ namespace Assignment3_KorbinDansie
         }
 
         /// <summary>
+        /// Reset counts section to start of app
+        /// </summary>
+        private void resetCounts()
+        {
+
+        }
+
+        /// <summary>
+        /// Reset gbStudentInfoName section to start of app
+        /// </summary>
+        private void resetStudentInfoTop()
+        {
+
+        }
+
+        /// <summary>
+        /// Reset counts section to start of app
+        /// </summary>
+        private void resetStudentInfoBottom()
+        {
+
+        }
+
+
+
+        /// <summary>
         /// Validate the user inputed the correct number or students and assignments, then enable the bottom UI
         /// </summary>
         /// <param name="sender"></param>
