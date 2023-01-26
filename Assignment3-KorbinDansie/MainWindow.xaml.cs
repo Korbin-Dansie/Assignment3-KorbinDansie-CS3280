@@ -173,7 +173,7 @@ namespace Assignment3_KorbinDansie
             updatetblockStudentInfoName();
 
             // Update the valid range
-            updatetbEnterAssignmentNumber();
+            updateUIAssignmentNumberRange();
         }
 
         #endregion Counts
@@ -316,23 +316,76 @@ namespace Assignment3_KorbinDansie
         private void btnSaveScore_Click(object sender, RoutedEventArgs e)
         {
             // Validate data
+            // Validate user input - display error lables
+            int assignmentNumberInput;
+            int assignmentScoreInput;
+
+            //Hide previous error messages
+            tbErrorStudentInfoAssignmentNumber.Visibility = Visibility.Hidden;
+            tbErrorStudentInfoAssignmentScore.Visibility = Visibility.Hidden;
+
+            // Try parsing number of students
+            if (!int.TryParse(tbAssignmentNumber.Text, out assignmentNumberInput))
+            {
+                // Display error message
+                tbErrorStudentInfoAssignmentNumber.Visibility = Visibility;
+                return;
+            }
+            else if (assignmentNumberInput < 1 || assignmentNumberInput > iaStudentScores.GetLength(1))
+            {
+                tbErrorStudentInfoAssignmentNumber.Visibility = Visibility;
+                return;
+            }
+
+
+            // Try parsing the new score
+            if (!int.TryParse(tbAssignmentScore.Text, out assignmentScoreInput))
+            {
+                tbErrorStudentInfoAssignmentScore.Visibility = Visibility;
+                return;
+            }
+            else if (assignmentScoreInput < 0 || assignmentScoreInput > 100)
+            {
+                tbErrorStudentInfoAssignmentScore.Visibility = Visibility;
+                return;
+            }
+
             // Save the students core to the array iaStudentScore - 1
+            iaStudentScores[iSelectedStudentIndex, assignmentNumberInput - 1] = assignmentScoreInput;
         }
 
         /// <summary>
         /// Update the tbEnterAssignmentNumber text with the current range
         /// </summary>
-        private void updatetbEnterAssignmentNumber()
+        private void updateUIAssignmentNumberRange()
+        {
+            updateUIAssignmentNumberRange(iaStudentScores.GetLength(1));
+        }
+
+        /// <summary>
+        /// Update the tbEnterAssignmentNumber text with a manual inputed range
+        /// </summary>
+        private void updateUIAssignmentNumberRange(int maxRange)
         {
             StringBuilder sb = new StringBuilder();
             String text = tbEnterAssignmentNumber.Text;
 
             // Get last all text before last space
             sb.Append(text.Substring(0, text.LastIndexOf(' ') + 1));
-            sb.Append($"(1-{iaStudentScores.GetLength(1)}):");
+            sb.Append($"(1-{maxRange}):");
 
             tbEnterAssignmentNumber.Text = sb.ToString();
+
+
+            // Update error message
+            // Update the Error range UI message
+            sb.Clear();
+            text = tbErrorStudentInfoAssignmentNumber.Text;
+            sb.Append(text.Substring(0, text.LastIndexOf(' ') + 1)); // Get everything before last space
+            sb.Append($"(1-{maxRange})"); // Add bounds to end of textblock
+            tbErrorStudentInfoAssignmentNumber.Text = sb.ToString();
         }
+
 
         #endregion Student Info Bottom
 

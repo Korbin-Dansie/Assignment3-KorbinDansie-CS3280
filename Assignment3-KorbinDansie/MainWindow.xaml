@@ -15,7 +15,7 @@
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Width" Value="110" />
             </Style>
-            <Style x:Key="ErrorCountsStyle" TargetType="TextBlock">
+            <Style x:Key="ErrorStyle" TargetType="TextBlock">
                 <Setter Property="TextWrapping" Value="Wrap" />
                 <Setter Property="TextAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -24,6 +24,16 @@
                 <Setter Property="Grid.Column" Value="1" />
                 <Setter Property="Visibility" Value="Hidden"/>
             </Style>
+            <Style x:Key="ErrorStudentInfoStyle" TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="Foreground" Value="#FFD9534F"/>
+                <Setter Property="Grid.Row" Value="1" />
+                <Setter Property="Grid.Column" Value="2" />
+                <Setter Property="Visibility" Value="Hidden"/>
+            </Style>
+
         </ResourceDictionary>
     </Window.Resources>
 
@@ -62,10 +72,10 @@
                         <ColumnDefinition Width="157*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="tblockNumberOfStudents" TextWrapping="Wrap" Text="Number of students:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Grid.Column="1" Margin="10,0,0,0" Height="18" AutomationProperties.HelpText="1-10" Text="10" MouseDoubleClick="tbNumberOfStudents_MouseDoubleClick"/>
+                    <TextBox x:Name="tbNumberOfStudents" TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Grid.Column="1" Margin="10,0,0,0" Height="18" MouseDoubleClick="tbNumberOfStudents_MouseDoubleClick"/>
 
                     <TextBlock x:Name="tblockNumberOfAssignments" TextWrapping="Wrap" Text="Number of assignments:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1" Height="18" AutomationProperties.HelpText="1-99" Text="20" MouseDoubleClick="tbNumberOfAssignments_MouseDoubleClick"/>
+                    <TextBox x:Name="tbNumberOfAssignments" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" UndoLimit="99" MaxLines="1" MaxLength="2" TextAlignment="Center" Padding="10,0,10,0" Width="39" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1" Height="18" MouseDoubleClick="tbNumberOfAssignments_MouseDoubleClick"/>
 
                     <Button x:Name="btnSubmitCounts" Content="Submit Counts" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10,1,10,1" Click="btnSubmitCounts_Click"/>
                 </Grid>
@@ -74,8 +84,8 @@
                 <TextBlock x:Name="tBlockResetScores" TextWrapping="Wrap" TextAlignment="Center" Padding="20,0,20,0">Reset<LineBreak/>Scores</TextBlock>
             </Button>
         </Grid>
-        <TextBlock x:Name="tbErrorAssignments" Text="Error: Number of assignments nees to be between 1 - 99" Style="{StaticResource ErrorCountsStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock x:Name="tbErrorStudents" Text="Error: Number of students nees to be between 1 - 10" Style="{StaticResource ErrorCountsStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="tbErrorAssignments" Text="Error: Number of assignments nees to be between 1 - 99" Style="{StaticResource ErrorStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="tbErrorStudents" Text="Error: Number of students nees to be between 1 - 10" Style="{StaticResource ErrorStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!--End Counts-->
 
@@ -125,8 +135,10 @@
                 <TextBlock x:Name="tbEnterAssignmentNumber" TextWrapping="Wrap" Text="Enter Assignment Number (1-99):" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 <TextBlock x:Name="tbEnterAssignmentNumber_Copy" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Assignment Score:" VerticalAlignment="Center" Grid.Row="1" Margin="106,0,0,0"/>
                 <TextBox x:Name="tbAssignmentNumber" Grid.Column="1" TextWrapping="Wrap" Width="39" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" MaxLength="2" MaxLines="1" Height="18" Margin="5,0,5,0"/>
-                <TextBox x:Name="tbAssignmentScore" Grid.Column="1" TextWrapping="Wrap" Width="39" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" MaxLength="2" MaxLines="1" Height="18" Margin="5,0,5,0"/>
+                <TextBox x:Name="tbAssignmentScore" Grid.Column="1" TextWrapping="Wrap" Width="39" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" MaxLength="3" MaxLines="1" Height="18" Margin="5,0,5,0"/>
                 <Button x:Name="btnSaveScore" Grid.Column="2" Content="Save Score" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" Padding="10,1,10,1" Margin="5,0,0,0" Click="btnSaveScore_Click"/>
+                <TextBlock x:Name="tbErrorStudentInfoAssignmentNumber"  Text="Error: Invalid assignment number. (1-99)" Style="{StaticResource ErrorStudentInfoStyle}"/>
+                <TextBlock x:Name="tbErrorStudentInfoAssignmentScore"  Text="Error: invalid score. (0-100)" Style="{StaticResource ErrorStudentInfoStyle}" />
             </Grid>
         </GroupBox>
         <Button x:Name="btnDisplayScores" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Click="btnDisplayScores_Click" Margin="0,5,0,5">
